@@ -41,6 +41,14 @@
       border: 1px solid #ddd;
       max-width: 100%;
     }
+    #downloadBtn {
+      display: none;
+      margin-top: 10px;
+      background-color: #2196F3;
+    }
+    #downloadBtn:hover {
+      background-color: #0b7dda;
+    }
   </style>
 </head>
 <body>
@@ -58,6 +66,7 @@
   </form>
   <div id="result">
     <canvas id="outputCanvas"></canvas>
+    <button id="downloadBtn">Download Image</button>
   </div>
 
   <script>
@@ -68,6 +77,7 @@
       const imageInput = document.getElementById('imageInput');
       const canvas = document.getElementById('outputCanvas');
       const ctx = canvas.getContext('2d');
+      const downloadBtn = document.getElementById('downloadBtn');
 
       if (imageInput.files && imageInput.files[0]) {
         const reader = new FileReader();
@@ -92,11 +102,23 @@
             // Draw image at the bottom
             const imgX = (canvas.width - img.width) / 2;
             ctx.drawImage(img, imgX, 60);
+
+            // Show download button
+            downloadBtn.style.display = 'inline-block';
           };
           img.src = e.target.result;
         };
         reader.readAsDataURL(imageInput.files[0]);
       }
+    });
+
+    // Add download functionality
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      const canvas = document.getElementById('outputCanvas');
+      const link = document.createElement('a');
+      link.download = 'combined-image.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
     });
   </script>
 </body>
