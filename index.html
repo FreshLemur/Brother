@@ -97,11 +97,11 @@
             ctx.font = '44px Arial';
             ctx.fillStyle = 'black';
             ctx.textAlign = 'center';
-            ctx.fillText(text, canvas.width / 2, 40);
+            ctx.fillText(text, canvas.width / 2, 60);
 
             // Draw image at the bottom
             const imgX = (canvas.width - img.width) / 2;
-            ctx.drawImage(img, imgX, 60);
+            ctx.drawImage(img, imgX, 120);
 
             // Show download button
             downloadBtn.style.display = 'inline-block';
